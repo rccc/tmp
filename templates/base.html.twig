@@ -4,14 +4,72 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+
         {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
         {% block javascripts %}
-{% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
+            {{ encore_entry_script_tags('app') }}
+                    {% endblock %}
+        
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div class="l-application app-codif" role="presentation">
+
+            {% block navigation %}
+                <div class="l-navigation-bar">
+                    <div class="u-clearfix"><code>l-navigation-bar</code> <button class="u-float-right js-menu-toggle is-dense u-no-margin">Menu</button></div>
+                </div>
+
+                <header class="l-navigation">
+                    <div class="l-navigation__drawer">
+                      <p class="demo-controls u-hide--large u-align--right">
+                        <button class="js-menu-pin is-dense u-no-margin u-hide--small">Pin</button>
+                        <button class="js-menu-close is-dense u-no-margin u-hide--medium">Close</button>
+                      </p>
+
+                      <code>l-navigation &gt;<br> l-navigation__drawer</code>
+                    </div>
+                </header>
+            {% endblock %}
+            
+            <main class="l-main">
+                {% block body %}
+
+                      <p><code>l-main</code></p>
+                      <p class="u-clearfix">
+                        <button class="js-aside-open">Open aside panel</button>
+                      </p>
+
+                {% endblock %}
+            </main>
+
+            {% block aside_panel %}
+                {#
+                <aside class="l-aside" id="aside-panel">
+                    
+                    {% block aside_panel_body %}
+
+                        <p>
+                          <button class="js-aside-pin is-dense">Pin</button>
+                          <button class="js-aside-close is-dense">Close</button>
+                        </p>
+                        <p><code>l-aside</code></p>
+                        <p>Panel width: <button class="is-inline is-dense js-aside-resize" data-resize-class="is-narrow" aria-controls="aside-panel">narrow</button> <button class="is-dense is-inline js-aside-resize" data-resize-class="" aria-controls="aside-panel">default</button> <button class="is-dense is-inline js-aside-resize" data-resize-class="is-wide" aria-controls="aside-panel">wide</button></p>
+
+                    {% endblock %}
+
+                </aside>
+                #}
+            {% endblock %}
+
+            {#
+            <aside class="l-status">
+                <code>l-status</code>
+            </aside>
+            #}
+        </div>
+
     </body>
 </html>

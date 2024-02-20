@@ -1,0 +1,12 @@
+@import 'vanilla-framework';
+@include vanilla;
+
+$vertical_space: 0.75rem; /*12 px*/
+
+.mb-0 {margin-bottom: 0;}
+.mb-1 {margin-bottom: $vertical_space;}
+.mb-2 {margin-bottom: calc($vertical_space*2);}
+.mb-3 {margin-bottom: calc($vertical_space*3);}
+.mb-4 {margin-bottom: calc($vertical_space*4);}
+
+.form-row {margin-bottom: calc($vertical_space*2);}
