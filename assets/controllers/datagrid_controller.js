@@ -67,7 +67,10 @@ export default class extends Controller {
                 }
             });            
         }
+    }
 
+    submit(event){
+        this.element.querySelector('form').submit();
     }
 
 }

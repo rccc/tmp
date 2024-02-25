@@ -5,19 +5,43 @@ namespace App\Service;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class DataSourceValidator
 {
 	private $error;
 
 	private $validHeaders = [
-		'col1',
-		'col2',
-		'col3',
+		"numero-experimentation",
+		"type-experimentation",
+		"site-essai",
+		"systeme-essai",
+		"lot-cellules",
+		"passage",
+		"stress",
+		"temps-traitement",
+		"genes-analyses",
+		"proteine-correspondante",
+		"proteines-analysees",
+		"gene-correspondant",
+		"projet",
+		"nom-item",
+		"numero-item",
+		"type-echantillon",
+		"nom-r-and-d",
+		"nom-commercial",
+		"reference-produit",
+		"pourcentage-produit",
+		"genre",
+		"espece",
+		"fold-change",
+		"augmentation-diminution",
+		"notation"
 	];
 
 	public function __construct(
-        private string $targetDirectory
+        private string $targetDirectory,
+        private SluggerInterface $slugger
 	) {
 	}
 
@@ -59,13 +83,17 @@ class DataSourceValidator
 		return true;
 	}
 
-	public function validateHeaders(array $headers): bool
+	public function validateHeaders(array $rawHeaders): bool
 	{	
 		// return true;
+		$arr = [];
+		$headers 	= array_map('trim',$rawHeaders);
+		$headers 	= array_map(fn($header):string => strtr($header, $arr), $headers);
+		$headers 	= array_map(fn($header):string => $this->slugger->slug($header)->lower(), $headers);
 
 		try
 		{
-			$diff = array_diff($this->validHeaders, array_map('trim',$headers));
+			$diff = array_diff($this->validHeaders, $headers);
 			return (count($diff) == 0);			
 		}
 		catch(\Exception $e)

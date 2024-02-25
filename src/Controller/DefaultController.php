@@ -5,14 +5,15 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\Routing\Attribute\Route;
 // use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\DataSource;
 use App\Form\DataSourceType;
-// use App\Service\DataSourceUploader;
-// use App\Service\DataSourceValidor;
 use App\Service\DataSourceImporter;
 use App\Service\Exception\DataSourceImporterException;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\CsvEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class DefaultController extends AbstractController
 {
@@ -30,7 +31,7 @@ class DefaultController extends AbstractController
             
             try {
                 
-                $ret = $importer->import($file, new DataSource);
+                $ret = $importer->import($file);
 
                 if($ret)
                 {
@@ -51,5 +52,63 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
             'form' => $form
         ]);
+    }
+
+    #[Route('/empty-file', name: 'app_empty_file')]
+    public function emptyFile()
+    {   
+        $content = '';
+        $arr = [
+            "Numéro expérimentation" => null,
+            "Type expérimentation" => null,
+            "Site essai" => null,
+            "Système essai" => null,
+            "Lot cellules" => null,
+            "Passage" => null,
+            "Stress" => null,
+            "Temps traitement" => null,
+            "Gènes analysés" => null,
+            "Protéine correspondante" => null,
+            "Protéines analysées" => null,
+            "Gène correspondant" => null,
+            "Projet" => null,
+            "Nom item" => null,
+            "Numéro item" => null,
+            "Type échantillon" => null,
+            "Nom R&D" => null,
+            "Nom commercial" => null,
+            "Référence produit" => null,
+            "Pourcentage produit" => null,
+            "Genre" => null,
+            "Espèce" => null,
+            "Fold change" => null,
+            "% augmentation/diminution" => null,
+            "Notation" => null
+        ];
+
+        try
+        {
+            $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
+
+            // encoding contents in CSV format
+            $content = $serializer->encode($arr, 'csv');            
+        }
+        catch(\Exception $e)
+        {
+            $this->addFlash('error', $e->getMessage());
+
+            return $this->redirectToRoute('app_default');
+        }
+
+        $response = new Response($content);
+
+        $disposition = HeaderUtils::makeDisposition(
+            HeaderUtils::DISPOSITION_ATTACHMENT,
+            'template.csv'
+        );
+
+        $response->headers->set('Content-Disposition', $disposition);
+
+        return $response;
     }
 }

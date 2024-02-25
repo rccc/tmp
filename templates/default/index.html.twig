@@ -3,7 +3,21 @@
 {% block title %}Hello DefaultController!{% endblock %}
 
 {% block body %}
+
+	<header>
+		<nav>
+			<ul>
+				<li data-turbo="false">
+					<a href="{{ path('app_empty_file') }}">
+						Télécharger un fichier vide
+					</a>
+				</li>
+			</ul>
+		</nav>	
+	</header>
+	
 	{{ dump(app.flashes) }}
+	
 	{% for message in app.flashes('success') %}
 	    <div class="alert alert-success">
 	        {{ message }}
@@ -17,30 +31,23 @@
 	{% endfor %}
 
 	<div class="row">
-	    <div class="col-3"></div>
-	    <div class="col-6" data-turbo="false">
-{# 		   {{ form_start(form) }}
-		        <div class="form-row">
-		        	{{ form_widget(form) }}
-		        </div>
-		        <div class="form-row">
-			        <button type="submit" class="btn btn-primary">Upload it!</button>	        	
-		        </div>
-		    {{ form_end(form) }} #}
+	    <div class="col-12">
+	    	<div data-turbo="false" data-controller="datagrid">
+				{{ form_start(form) }}
+					<div class="form-row">
+						{# {{ form_label(form.source) }} #}
+						{{ form_row(form.source, {'attr': {
+							'action':path('app_default'),
+							'data-action':'change->datagrid#onFileChange',
+							'accept':'.csv'
+							}}) }}
+						{{ form_rest(form) }}
+						<button data-action="click->datagrid#submit">Save</button>
+					</div>
+				{{ form_end(form) }}
+				<div id="grid" ></div>					    		
+	    	</div>
 	    </div>
-	    <div class="col-3"></div>
 	</div>
-	<div class="row">
-		<div class="col-12">
-			<div data-controller="datagrid">
-				{# <div class="hide-topbar"></div> #}
-				<div class="grid-toolbar">
-					<input type="file" data-action="change->datagrid#onFileChange" name="files-csv" accept=".csv">
-					<label for="csv-file">Browse…</label>
-					<button>Save</button>
-				</div>
-				<div id="grid" ></div>				
-			</div>
-		</div>
-	</div>
+
 {% endblock %}
