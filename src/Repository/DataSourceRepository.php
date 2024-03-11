@@ -21,6 +21,31 @@ class DataSourceRepository extends ServiceEntityRepository
         parent::__construct($registry, DataSource::class);
     }
 
+    public function findAllWithExperimentationCount()
+    {
+        $arr = [];
+        $results = $this->createQueryBuilder('s')
+            ->leftJoin('s.experimentations', 'e')
+            ->leftJoin('s.uploader', 'u')
+            ->addSelect('count(e) as countExp')
+            ->addSelect('u')
+            ->addGroupBy('s.id', 'u.id')
+            ->orderBy('s.id', 'DESC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+       ;
+
+       foreach ($results as $row)
+       {
+            dump($row);
+            $row[0]->setCountExp($row['countExp']);
+            $arr[] = $row[0];
+       }
+
+       return $arr;
+    }
+
 //    /**
 //     * @return DataSource[] Returns an array of DataSource objects
 //     */

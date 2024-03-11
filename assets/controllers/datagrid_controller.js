@@ -20,6 +20,7 @@ export default class extends Controller {
         // console.log()
         // this.element.style.height = (this.element.clientHeight - 38) +"px";
     }
+    
     connect() {
 
         let my_data = DataGridXL.createEmptyData(100, 20);
@@ -52,8 +53,6 @@ export default class extends Controller {
         let _id =  this.id
         let file = event.target.files[0];
         
-        console.log(file)
-
         if(file){
             Papa.parse(file, {
                 header: true,

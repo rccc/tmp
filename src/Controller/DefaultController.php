@@ -2,18 +2,21 @@
 
 namespace App\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\Routing\Attribute\Route;
-// use Doctrine\ORM\EntityManagerInterface;
-use App\Form\DataSourceType;
-use App\Service\DataSourceImporter;
-use App\Service\Exception\DataSourceImporterException;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use App\Entity\Experimentation;
+use App\Form\DataSourceType;
+use App\Form\SearchType;
+use App\Service\DataSourceImporter;
+use App\Service\Exception\DataSourceImporterException;
 
 class DefaultController extends AbstractController
 {
@@ -58,6 +61,7 @@ class DefaultController extends AbstractController
     public function emptyFile()
     {   
         $content = '';
+        /*
         $arr = [
             "Numéro expérimentation" => null,
             "Type expérimentation" => null,
@@ -85,6 +89,35 @@ class DefaultController extends AbstractController
             "% augmentation/diminution" => null,
             "Notation" => null
         ];
+        */
+
+        $arr = [
+            "numero-experimentation" => null,
+            "type-experimentation" => null,
+            "site-essai" => null,
+            "systeme-essai" => null,
+            "lot-cellules" => null,
+            "passage" => null,
+            "stress" => null,
+            "temps-traitement" => null,
+            "genes-analyses" => null,
+            "proteine-correspondante" => null,
+            "proteines-analysees" => null,
+            "gene-correspondant" => null,
+            "projet" => null,
+            "nom-item" => null,
+            "numero-item" => null,
+            "type-echantillon" => null,
+            "nom-r-et-d" => null,
+            "nom-commercial" => null,
+            "reference-produit" => null,
+            "pourcentage-produit" => null,
+            "genre" => null,
+            "espece" => null,
+            "fold-change" => null,
+            "augmentation-diminution" => null,
+            "notation" => null
+        ];
 
         try
         {
@@ -110,5 +143,38 @@ class DefaultController extends AbstractController
         $response->headers->set('Content-Disposition', $disposition);
 
         return $response;
+    }
+
+    #[Route('/search', name: 'app_search')]
+    public function search(Request $request, EntityManagerInterface $manager): Response
+    {
+        $numExpList     = $manager->getRepository(Experimentation::class)->getNumExpListAsChoiceList();
+        $typeExpList    = $manager->getRepository(Experimentation::class)->getTypeExpListAsChoiceList();
+        $nomCommList    = $manager->getRepository(Experimentation::class)->getNomCommListAsChoiceList();
+        $sysEssaiList   = $manager->getRepository(Experimentation::class)->getSystEssaiListAsChoiceList();
+
+        $form =  $this->createForm(SearchType::class, null, [
+            'num_exp'       => $numExpList,
+            'type_exp'      => $typeExpList,
+            'nom_comm'      => $nomCommList,           
+            'syst_essai'    => $sysEssaiList           
+        ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) 
+        {
+            try{
+                $results = $manager->getRepository(Experimentation::class)->search($form->getData());
+                return new JsonResponse(['status' => 'success', 'data' => $results]);
+            }catch(\Exception $e)
+            {
+                return new JsonResponse(['status' => 'error', 'message' => $e->getMessage()]);                
+            }
+        }
+
+        return $this->render('default/search.html.twig', [
+            'form' => $form
+        ]);
     }
 }

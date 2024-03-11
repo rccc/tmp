@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DataSource index{% endblock %}
+
+{% block body %}
+    <h1>DataSource index</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Filename</th>
+                <th>Created_at</th>
+                <th>Uploader</th>
+                <th>count exp</th>
+                {% if is_granted('ROLE_ADMIN') or data_source.uploader.id == app.user.id %}
+                    <th>actions</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+        {% for data_source in data_sources %}
+            <tr>
+                <td>{{ data_source.id }}</td>
+                <td>{{ data_source.filename }}</td>
+                <td>{{ data_source.createdAt ? data_source.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ data_source.uploader.username }}</td>
+                <td>{{ data_source.countExp }}</td>
+                {% if is_granted('ROLE_ADMIN') or data_source.uploader.id == app.user.id %}
+                    <td>
+                        {% include 'data_source/_delete_form.html.twig' %}
+                    </td>
+                {% endif %}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

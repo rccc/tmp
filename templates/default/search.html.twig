@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DefaultController!{% endblock %}
+
+{% block body %}
+
+	<header>
+		<nav>
+			<ul>
+				<li data-turbo="false">
+					<a href="{{ path('app_empty_file') }}">
+						Télécharger un fichier vide
+					</a>
+				</li>
+			</ul>
+		</nav>	
+	</header>
+		
+	{% for message in app.flashes('success') %}
+	    <div class="alert alert-success">
+	        {{ message }}
+	    </div>
+	{% endfor %}
+
+	{% for message in app.flashes('error') %}
+	    <div class="alert alert-success">
+	        {{ message }}
+	    </div>
+	{% endfor %}
+
+	<div class="row" data-controller="search">
+	    <div class="col-12">
+	    	<div data-turbo=false>
+	    		{{ form_start(form, {'attr':{'action':path('app_search')}}) }}
+	    			{{ form_row(form.num_exp) }}
+	    			{{ form_row(form.type_exp) }}
+	    			{{ form_row(form.site_essai) }}
+	    			{{ form_row(form.syst_essai) }}
+	    			{{ form_row(form.lot_cell) }}
+	    			{{ form_row(form.passage) }}
+	    			{{ form_row(form.stress) }}
+	    			{{ form_row(form.temps_traitement) }}
+	    			{{ form_row(form.gene) }}
+	    			{{ form_row(form.prot_analyse) }}
+	    			{{ form_row(form.gene_corr) }}
+	    			{{ form_row(form.projet) }}
+	    			{{ form_row(form.nom_item) }}
+	    			{{ form_row(form.nom_comm) }}
+	    			{{ form_row(form.ref_produit) }}
+	    			{{ form_row(form.pourcentage_produit) }}
+	    			{{ form_row(form.genre) }}
+	    			{{ form_row(form.espece) }}
+	    			{{ form_row(form.fold_change) }}
+	    			{{ form_row(form.augm_dim) }}
+	    			{{ form_row(form.notation) }}
+	    			{{ form_row(form.prot_corr) }}
+	    			{{ form_row(form.num_item) }}
+	    			{{ form_row(form.type_echantillon) }}
+	    			{{ form_row(form.nom_rec_dev) }}
+	    			{# <input type="submit" name="submit"> #}
+	    			<button data-action="click->search#submit">Submit</button>
+	    		{{ form_end(form) }}
+	    	</div>
+	    </div>
+	</div>
+	<dov class="row">
+		<div class="col-12">
+	    	<div data-turbo="false" data-controller="datagrid">
+				<div id="grid" ></div>					    		
+	    	</div>
+		</div>
+	</dov>
+
+{% endblock %}

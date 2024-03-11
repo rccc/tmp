@@ -65,15 +65,14 @@ class DataSourceImporter
 
 		try {
 			
-			$this->persistDataSource();
-			$this->persistExperimentations();
+			$datasource = $this->persistDataSource();
+			// $this->persistExperimentations($datasource);
 
 		} catch (Exception $e) {
 			$this->uploader->deleteFile();
 			$this->error = $e->getMessage();
 			return false;	
 		}
-
 
 		return true;
 	}
@@ -92,9 +91,20 @@ class DataSourceImporter
 		return $this->error;
 	}
 
-	private function persistDataSource(): bool
+	private function persistDataSource()
 	{
-		$ret = $this->persistor->persistDataSource($this->filename);
+		$filepath = $this->uploader->getTargetDirectory() . '/'. $this->filename;
+
+		if(!file_exists($filepath))
+		{
+			throw new DataSourceImporterException('source file does not exists');
+		}
+
+		$serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
+
+		$csvData = $serializer->decode(file_get_contents($filepath), 'csv');  
+
+		$ret = $this->persistor->persistDataSource($this->filename, $csvData);
 
 		if(!$ret)
 		{
@@ -106,7 +116,7 @@ class DataSourceImporter
 		return $ret;
 	}
 
-	private function persistExperimentations()
+	private function persistExperimentations($datasource)
 	{
 		try{
 
@@ -121,7 +131,7 @@ class DataSourceImporter
 
 			$csvData = $serializer->decode(file_get_contents($filepath), 'csv');    
 
-			$ret = $this->persistor->persistExperimentations($csvData);
+			$ret = $this->persistor->persistExperimentations($csvData, $datasource);
 
 
 		}catch(\Exception $e)

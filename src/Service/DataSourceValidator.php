@@ -28,7 +28,7 @@ class DataSourceValidator
 		"nom-item",
 		"numero-item",
 		"type-echantillon",
-		"nom-r-and-d",
+		"nom-r-et-d",
 		"nom-commercial",
 		"reference-produit",
 		"pourcentage-produit",
@@ -45,7 +45,7 @@ class DataSourceValidator
 	) {
 	}
 
-	public function validate(string $filename)
+	public function validate(string $filename): bool
 	{
 		$data = [];
 		
@@ -76,7 +76,14 @@ class DataSourceValidator
 
 		if(!$isValidHeaders)
 		{
-			$this->error = 'Data source columns headers does not match';
+			return false;
+		}
+
+		$isNotEmpty = $this->validateIsnotEmpty(array_slice($data, 1, 10));
+
+		if(!$isNotEmpty)
+		{
+			$this->error = 'Data source seems to be empty';
 			return false;
 		}
 
@@ -85,6 +92,7 @@ class DataSourceValidator
 
 	public function validateHeaders(array $rawHeaders): bool
 	{	
+
 		// return true;
 		$arr = [];
 		$headers 	= array_map('trim',$rawHeaders);
@@ -94,13 +102,49 @@ class DataSourceValidator
 		try
 		{
 			$diff = array_diff($this->validHeaders, $headers);
-			return (count($diff) == 0);			
+
+			if(count($diff) == 0)
+			{
+				return true;
+			}
+			else
+			{
+				$this->error = 'Data source columns headers does not match: ' . implode(', ', $diff);
+				return false;
+			}
 		}
 		catch(\Exception $e)
+		{
+			$this->error = $e->getMessage();
+			return false;
+		}
+
+	}
+
+	public function validateIsnotEmpty(array $rows): bool
+	{
+		if(empty($rows))
 		{
 			return false;
 		}
 
+		foreach($rows as $row)
+		{
+			if(empty($row))
+			{
+				return false;
+			}
+
+			foreach($row as $column)
+			{
+				if(!empty($column))
+				{
+					return true;
+				}
+			}
+		}
+
+		return true;
 	}
 
 	public function getError()

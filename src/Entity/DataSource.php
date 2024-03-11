@@ -28,9 +28,16 @@ class DataSource
     #[ORM\OneToMany(targetEntity: Experimentation::class, mappedBy: 'source', orphanRemoval: true)]
     private Collection $experimentations;
 
+    public ?int $countExp = null;
+
     public function __construct()
     {
         $this->experimentations = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getFilename();
     }
 
     public function getId(): ?int
@@ -100,6 +107,18 @@ class DataSource
                 $experimentation->setSource(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCountexp()
+    {
+        return $this->countExp;
+    }
+
+    public function setCountExp(int $count)
+    {
+        $this->countExp = $count;
 
         return $this;
     }

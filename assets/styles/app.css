@@ -19,3 +19,15 @@ body {
 .app-codif .l-main ,
 .app-codif .l-aside { padding:1rem; }
 
+
+.wrapper {
+    @media(min-width: 992px) {
+        display: grid;
+        grid-template-columns: var(--sidebar-max-width) auto;
+        min-height: 100vh;
+    }
+
+    @media(min-width: 1280px) {
+        grid-column-gap: 0;
+    }
+}

@@ -2,4 +2,4 @@
 
 namespace App\Service\Exception;
 
-class DataSourceUploaderException extends Exception {}
+class DataSourceUploaderException extends \Exception {}
