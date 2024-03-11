@@ -12,8 +12,12 @@ import DataGridXL from "@datagridxl/datagridxl2";
  */
 export default class extends Controller {
 
+    static targets = ["grid"]
+
     async submit(e){
+        
         e.preventDefault()
+
         let form = this.element.querySelector('form')
 
         if(!form){
@@ -32,6 +36,7 @@ export default class extends Controller {
         })).json()
         
         if(response.status == 'success'){
+            this.gridTarget.classList.remove('u-hide')
             let grid = new DataGridXL('grid', {
                 data: response.data
             });            
