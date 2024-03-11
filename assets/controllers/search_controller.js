@@ -30,9 +30,16 @@ export default class extends Controller {
             return false
         } 
 
+        let formData = new FormData(form)
+
+        if(this.isFormEmpty(formData)) {
+            alert('Le formulaire est vide !')
+            return false
+        }
+
         let response = await (await fetch(url, {
             method: 'POST',
-            body: new FormData(form)
+            body: formData
         })).json()
         
         if(response.status == 'success'){
@@ -41,6 +48,22 @@ export default class extends Controller {
                 data: response.data
             });            
         }
+    }
 
+    isFormEmpty(formData) {
+
+        let isEmpty = true
+
+        for (var pair of formData.entries()) {
+            if(pair[0] != '_token'){
+                if(pair[1]){
+                    isEmpty = false
+                    break
+                }
+            }
+            console.log(pair[0]+ ", " + pair[1]);
+        }
+
+        return isEmpty
     }
 }
