@@ -33,6 +33,7 @@
 		<div class="row">
 		    <div class="col-12">
 		    	<div data-turbo=false>
+
 		    		{{ form_start(form, {'attr':{'action':path('app_search')}}) }}
 		    			<div class="row">
 		    				<div class="col-6">
@@ -63,10 +64,23 @@
 		    					{{ form_row(form.num_item) }}
 		    					{{ form_row(form.type_echantillon) }}
 		    					{{ form_row(form.nom_rec_dev) }}
+
 		    				</div>
 		    			</div>
-		    			{# <input type="submit" name="submit"> #}
 		    			<button data-action="click->search#submit">Submit</button>
+		    			{{ form_row(form.export, {'attr': 
+		    				{
+		    					'class':'u-hide',
+		    					'data-search-target':'exportBtn', 
+		    				}}) 
+		    			}}
+
+{# 		    			<button 
+		    				class="u-hide" 
+		    				data-search-target="exportBtn" 
+		    				data-action="click->search#export">
+		    				Export
+		    			</button> #}
 		    		{{ form_end(form) }}
 		    	</div>
 		    </div>

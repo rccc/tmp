@@ -12,7 +12,8 @@ import DataGridXL from "@datagridxl/datagridxl2";
  */
 export default class extends Controller {
 
-    static targets = ["grid"]
+    static targets = ["grid", "exportBtn"]
+    grid = null 
 
     async submit(e){
         
@@ -43,8 +44,11 @@ export default class extends Controller {
         })).json()
         
         if(response.status == 'success'){
+            
             this.gridTarget.classList.remove('u-hide')
-            let grid = new DataGridXL('grid', {
+            this.exportBtnTarget.classList.remove('u-hide')
+
+            this.   grid = new DataGridXL('grid', {
                 data: response.data
             });            
         }
@@ -66,4 +70,5 @@ export default class extends Controller {
 
         return isEmpty
     }
+
 }

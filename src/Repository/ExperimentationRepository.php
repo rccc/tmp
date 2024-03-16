@@ -185,9 +185,6 @@ class ExperimentationRepository extends ServiceEntityRepository
             ;
         }
 
-       // ->orderBy('e.id', 'ASC')
-       // ->setMaxResults(10)
-       
        return $qb
             ->getQuery()
             ->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY)

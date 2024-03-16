@@ -11,6 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class SearchType extends AbstractType
 {
@@ -58,6 +59,7 @@ class SearchType extends AbstractType
             ->add('num_item')
             ->add('type_echantillon')
             ->add('nom_rec_dev')
+            ->add('export', SubmitType::class)
         ;
     }
 

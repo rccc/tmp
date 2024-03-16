@@ -31,9 +31,9 @@ class ExpFinderDto
 	    public ?string $prot_corr = null,
 	    public ?string $num_item = null,
 	    public ?string $type_echantillon = null,
-	    public ?string $nom_rec_dev = null
+	    public ?string $nom_rec_dev = null,
+	    public ?string $export = null
 	)
 	{
-
 	}	
 }

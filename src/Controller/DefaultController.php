@@ -165,8 +165,34 @@ class DefaultController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) 
         {
             try{
+                     
+                $dto = $form->getData();
+
                 $results = $manager->getRepository(Experimentation::class)->search($form->getData());
-                return new JsonResponse(['status' => 'success', 'data' => $results]);
+
+                if($form->get('export')->isClicked())
+                {
+                    $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
+
+                    // encoding contents in CSV format
+                    $content = $serializer->encode($results, 'csv');
+
+                    $response = new Response($content);
+
+                    $disposition = HeaderUtils::makeDisposition(
+                        HeaderUtils::DISPOSITION_ATTACHMENT,
+                        'template.csv'
+                    );
+
+                    $response->headers->set('Content-Disposition', $disposition);
+
+                    return $response;
+                }
+                else
+                {
+                    return new JsonResponse(['status' => 'success', 'data' => $results]);
+                }
+
             }catch(\Exception $e)
             {
                 return new JsonResponse(['status' => 'error', 'message' => $e->getMessage()]);                
@@ -177,4 +203,5 @@ class DefaultController extends AbstractController
             'form' => $form
         ]);
     }
+
 }
