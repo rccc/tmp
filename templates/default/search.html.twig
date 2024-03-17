@@ -10,11 +10,12 @@
 		
 		<div class="row">
 		    <div class="col-12">
-		    	<div data-turbo=false>
+
+		    	<div data-turbo=false class="mb-4">
 
 		    		{{ form_start(form, {'attr':{'action':path('app_search')}}) }}
 		    			<div class="row">
-		    				<div class="col-6">
+		    				<div class="col-4">
 		    					{{ form_row(form.num_exp) }}
 		    					{{ form_row(form.type_exp) }}
 		    					{{ form_row(form.site_essai) }}
@@ -23,17 +24,21 @@
 		    					{{ form_row(form.passage) }}
 		    					{{ form_row(form.stress) }}
 		    					{{ form_row(form.temps_traitement) }}
+		    					{{ form_row(form.pourcentage_produit) }}
+
+		    				</div>
+		    				<div class="col-4">
 		    					{{ form_row(form.gene) }}
 		    					{{ form_row(form.prot_analyse) }}
 		    					{{ form_row(form.gene_corr) }}
 		    					{{ form_row(form.projet) }}
 		    					{{ form_row(form.notation) }}
-		    				</div>
-		    				<div class="col-6">
 		    					{{ form_row(form.nom_item) }}
 		    					{{ form_row(form.nom_comm) }}
 		    					{{ form_row(form.ref_produit) }}
-		    					{{ form_row(form.pourcentage_produit) }}
+		    				</div>
+		    				
+		    				<div class="col-4">
 		    					{{ form_row(form.genre) }}
 		    					{{ form_row(form.espece) }}
 		    					{{ form_row(form.fold_change) }}

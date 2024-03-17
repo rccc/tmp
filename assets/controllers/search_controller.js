@@ -48,7 +48,7 @@ export default class extends Controller {
             this.gridTarget.classList.remove('u-hide')
             this.exportBtnTarget.classList.remove('u-hide')
 
-            this.   grid = new DataGridXL('grid', {
+            this.grid = new DataGridXL('grid', {
                 data: response.data
             });            
         }

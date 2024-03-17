@@ -50,11 +50,13 @@
                                     <ul class="p-side-navigation__list">
                                         <li class="p-side-navigation__item">
                                             <a class="p-side-navigation__link" href="{{ path('app_search') }}" aria-current="page">
+                                                <i class="p-icon--search p-side-navigation__icon"></i>
                                                 <span class="p-side-navigation__label">Recherche</span>
                                             </a>
                                         </li>
                                         <li class="p-side-navigation__item">
                                             <a class="p-side-navigation__link" href="{{ path('app_default') }}">
+                                                <i class="p-icon--plus p-side-navigation__icon"></i>
                                                 <span class="p-side-navigation__label">
                                                     Ajouter
                                                 </span>
@@ -62,6 +64,7 @@
                                         </li>
                                         <li class="p-side-navigation__item">
                                             <a class="p-side-navigation__link" href="{{ path('app_data_source_index') }}">
+                                                <i class="p-icon--containers p-side-navigation__icon is-light"></i>
                                                 <span class="p-side-navigation__label">
                                                     Sources
                                                 </span>
@@ -69,6 +72,7 @@
                                         </li>
                                         <li class="p-side-navigation__item" data-turbo="false">
                                             <a class="p-side-navigation__link" href="{{ path('app_empty_file') }}">
+                                                <i class="p-icon--begin-downloading p-side-navigation__icon is-light"></i>
                                                 <span class="p-side-navigation__label">
                                                     Fichier vierge
                                                 </span>

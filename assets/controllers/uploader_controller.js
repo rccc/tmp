@@ -25,7 +25,7 @@ export default class extends Controller {
     
     connect() {
 
-        let my_data = DataGridXL.createEmptyData(100, 20);
+        // let my_data = DataGridXL.createEmptyData(100, 20);
         this.id = this.element.querySelector('#grid')
         if(this.id){
 
