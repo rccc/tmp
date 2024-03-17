@@ -4,31 +4,28 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
-class UserType extends AbstractType
+class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('username', null, ['label' => 'Identifiant'])
-            ->add('roles', ChoiceType::class, [
-                'choices'  => [
-                    'ROLE_USER' => 'ROLE_USER',
-                    'ROLE_CONTRIBUTOR' => 'ROLE_CONTRIBUTOR',
-                    'ROLE_ADMIN' => 'ROLE_ADMIN'
+            ->add('username')
+            ->add('agreeTerms', CheckboxType::class, [
+                                'mapped' => false,
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'You should agree to our terms.',
+                    ]),
                 ],
-                'expanded' => true,
-                'multiple' => true
             ])
-            ->add('firstname', null, ['label' => 'Prénom'])
-            ->add('lastname', null, ['label' => 'Nom'])
-            ->add('email')
             ->add('plainPassword', PasswordType::class, [
                                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
@@ -46,7 +43,6 @@ class UserType extends AbstractType
                     ]),
                 ],
             ])
-            ;
         ;
     }
 

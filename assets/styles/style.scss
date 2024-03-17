@@ -6,11 +6,21 @@
 
 
 $vertical_space: 0.75rem; /*12 px*/
+$horizontal_space: 0.75rem; /*12 px*/
 
 .mb-0 {margin-bottom: 0;}
-.mb-1 {margin-bottom: $vertical_space;}
-.mb-2 {margin-bottom: calc($vertical_space*2);}
-.mb-3 {margin-bottom: calc($vertical_space*3);}
-.mb-4 {margin-bottom: calc($vertical_space*4);}
+.mb-1 {margin-bottom: $horizontal_space;}
+.mb-2 {margin-bottom: calc($horizontal_space*2);}
+.mb-3 {margin-bottom: calc($horizontal_space*3);}
+.mb-4 {margin-bottom: calc($horizontal_space*4);}
+
+.ml-0 {margin-left: 0;}
+.ml-1 {margin-left: $horizontal_space;}
+.ml-2 {margin-left: calc($vertical_space*2);}
+.ml-3 {margin-left: calc($vertical_space*3);}
+.ml-4 {margin-left: calc($vertical_space*4);}
+
+
+.d-flex { display: flex;}
 
 .form-row {margin-bottom: calc($vertical_space*2);}
