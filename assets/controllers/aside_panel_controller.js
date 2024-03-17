@@ -12,7 +12,7 @@ import { Controller } from '@hotwired/stimulus';
 export default class extends Controller {
     
     static targets = ["panel"]
-    
+
     toggleCollapse(event) {
         event.preventDefault()
         if(this.panelTarget.classList.contains('is-collapsed')){
@@ -36,4 +36,20 @@ export default class extends Controller {
     close(event) {
         this.panelTarget.classList.add('is-collapsed')            
     }
+
+    default(event) {
+        this.panelTarget.classList.remove('is-narrow')
+        this.panelTarget.classList.remove('is-wide')
+    }
+
+    wide(event) {
+        this.panelTarget.classList.remove('is-narrow')
+        this.panelTarget.classList.add('is-wide')
+    }
+
+    narrow(event) {
+        this.panelTarget.classList.remove('is-wide')
+        this.panelTarget.classList.add('is-narrow')
+    }
+
 }

@@ -57,7 +57,7 @@
 		    					'data-search-target':'exportBtn', 
 		    				}}) 
 		    			}}
-		    			<button data-action="aside-panel#toggleCollapse">Toggle</button>s
+		    			<button data-action="aside-panel#toggleCollapse">Toggle</button>
 		    		{{ form_end(form) }}
 		    	</div>
 		    </div>
@@ -75,13 +75,3 @@
 
 {% endblock %}
 
-{% block aside_panel_body %}
-    <p>
-    	<button class="js-aside-pin is-dense" data-action="aside-panel#togglePin">Pin</button>
-      	<button class="js-aside-close is-dense" data-action="aside-panel#close">Close</button>
-    </p>
-    <p>
-    	<code>l-aside</code>
-    </p>
-    <p>Panel width: <button class="is-inline is-dense js-aside-resize" data-resize-class="is-narrow" aria-controls="aside-panel">narrow</button> <button class="is-dense is-inline js-aside-resize" data-resize-class="" aria-controls="aside-panel">default</button> <button class="is-dense is-inline js-aside-resize" data-resize-class="is-wide" aria-controls="aside-panel">wide</button></p>
-{% endblock %}
