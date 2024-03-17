@@ -11,11 +11,10 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Filename</th>
-                        <th>Created_at</th>
-                        <th>Uploader</th>
-                        <th>count exp</th>
+                        <th>Fichier</th>
+                        <th>Date</th>
+                        <th>Contributeur</th>
+                        <th>Nb Expérimentations</th>
                         {% if is_granted('ROLE_ADMIN') or data_source.uploader.id == app.user.id %}
                             <th>actions</th>
                         {% endif %}
@@ -24,7 +23,6 @@
                 <tbody>
                 {% for data_source in data_sources %}
                     <tr>
-                        <td>{{ data_source.id }}</td>
                         <td>{{ data_source.filename }}</td>
                         <td>{{ data_source.createdAt ? data_source.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                         <td>{{ data_source.uploader.username }}</td>
@@ -37,7 +35,7 @@
                     </tr>
                 {% else %}
                     <tr>
-                        <td colspan="4">no records found</td>
+                        <td colspan="4">Aucun résultat</td>
                     </tr>
                 {% endfor %}
                 </tbody>

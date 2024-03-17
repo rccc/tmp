@@ -70,7 +70,17 @@
                                                 </span>
                                             </a>
                                         </li>
-                                        <li class="p-side-navigation__item" data-turbo="false">
+                                        <li class="p-side-navigation__item">
+                                            <a class="p-side-navigation__link" href="{{ path('app_user_index') }}">
+                                                <i class="p-icon--user-group p-side-navigation__icon is-light"></i>
+                                                <span class="p-side-navigation__label">
+                                                    Utilisateurs
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <ul class="p-side-navigation__list">
+                                        <li class="p-side-navigation__item" data-turbo="false" style="border-top: 2px solid blue;">
                                             <a class="p-side-navigation__link" href="{{ path('app_empty_file') }}">
                                                 <i class="p-icon--begin-downloading p-side-navigation__icon is-light"></i>
                                                 <span class="p-side-navigation__label">
