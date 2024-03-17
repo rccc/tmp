@@ -10,7 +10,6 @@
 		
 		<div class="row">
 		    <div class="col-12">
-
 		    	<div data-turbo=false class="mb-4">
 
 		    		{{ form_start(form, {'attr':{'action':path('app_search')}}) }}
@@ -50,20 +49,15 @@
 
 		    				</div>
 		    			</div>
-		    			<button data-action="click->search#submit">Submit</button>
+
+		    			<button data-action="click->search#submit">Rechercher</button>
 		    			{{ form_row(form.export, {'attr': 
 		    				{
 		    					'class':'u-hide',
 		    					'data-search-target':'exportBtn', 
 		    				}}) 
 		    			}}
-
-{# 		    			<button 
-		    				class="u-hide" 
-		    				data-search-target="exportBtn" 
-		    				data-action="click->search#export">
-		    				Export
-		    			</button> #}
+		    			<button data-action="aside-panel#toggleCollapse">Toggle</button>s
 		    		{{ form_end(form) }}
 		    	</div>
 		    </div>
@@ -79,5 +73,15 @@
 
 	</div>
 
+{% endblock %}
 
+{% block aside_panel_body %}
+    <p>
+    	<button class="js-aside-pin is-dense" data-action="aside-panel#togglePin">Pin</button>
+      	<button class="js-aside-close is-dense" data-action="aside-panel#close">Close</button>
+    </p>
+    <p>
+    	<code>l-aside</code>
+    </p>
+    <p>Panel width: <button class="is-inline is-dense js-aside-resize" data-resize-class="is-narrow" aria-controls="aside-panel">narrow</button> <button class="is-dense is-inline js-aside-resize" data-resize-class="" aria-controls="aside-panel">default</button> <button class="is-dense is-inline js-aside-resize" data-resize-class="is-wide" aria-controls="aside-panel">wide</button></p>
 {% endblock %}
