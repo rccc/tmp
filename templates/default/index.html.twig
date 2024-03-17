@@ -1,48 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DefaultController!{% endblock %}
+{% block title %}Ajout{% endblock %}
+
+{% block page_title %}Ajouter des données{% endblock %}
 
 {% block body %}
-
-	<header>
-		<nav>
-			<ul>
-				<li data-turbo="false">
-					<a href="{{ path('app_empty_file') }}">
-						Télécharger un fichier vide
-					</a>
-				</li>
-			</ul>
-		</nav>	
-	</header>
 	
-	{{ dump(app.flashes) }}
-	
-	{% for message in app.flashes('success') %}
-	    <div class="alert alert-success">
-	        {{ message }}
-	    </div>
-	{% endfor %}
-
-	{% for message in app.flashes('error') %}
-	    <div class="alert alert-success">
-	        {{ message }}
-	    </div>
-	{% endfor %}
-
 	<div class="row">
 	    <div class="col-12">
-	    	<div data-turbo="false" data-controller="datagrid">
+	    	<div data-turbo="false" data-controller="uploader">
 				{{ form_start(form) }}
 					<div class="form-row">
 						{# {{ form_label(form.source) }} #}
 						{{ form_row(form.source, {'attr': {
 							'action':path('app_default'),
-							'data-action':'change->datagrid#onFileChange',
+							'data-action':'change->uploader#onFileChange',
 							'accept':'.csv'
 							}}) }}
 						{{ form_rest(form) }}
-						<button data-action="click->datagrid#submit">Save</button>
+						<button data-action="click->uploader#submit">Save</button>
+						<span>
+							<i class="p-icon--spinner u-animation--spin u-hide" data-uploader-target="spinner"></i>
+						</span>
 					</div>
 				{{ form_end(form) }}
 				<div id="grid" ></div>					    		

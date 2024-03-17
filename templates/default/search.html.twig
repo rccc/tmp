@@ -1,32 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DefaultController!{% endblock %}
+{% block title %}Recherche{% endblock %}
+
+{% block page_title %}Recherche{% endblock %}
 
 {% block body %}
-
-	<header>
-		<nav>
-			<ul>
-				<li data-turbo="false">
-					<a href="{{ path('app_empty_file') }}">
-						Télécharger un fichier vide
-					</a>
-				</li>
-			</ul>
-		</nav>	
-	</header>
-		
-	{% for message in app.flashes('success') %}
-	    <div class="alert alert-success">
-	        {{ message }}
-	    </div>
-	{% endfor %}
-
-	{% for message in app.flashes('error') %}
-	    <div class="alert alert-success">
-	        {{ message }}
-	    </div>
-	{% endfor %}
 
 	<div data-controller="search">
 		

@@ -15,11 +15,6 @@ body {
 /* end datagrid  */
 
 
-.app-codif .l-navigation__drawer,
-.app-codif .l-main ,
-.app-codif .l-aside { padding:1rem; }
-
-
 .wrapper {
     @media(min-width: 992px) {
         display: grid;

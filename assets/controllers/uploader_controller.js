@@ -13,6 +13,8 @@ import Papa from 'papaparse';
  */
 export default class extends Controller {
 
+    static targets = ["spinner"]
+
     static grid
     static id
 
@@ -59,7 +61,6 @@ export default class extends Controller {
                 dynamicTyping: true,
                 skipEmptyLines : true,
                 complete: function(results) {
-                    console.log(results, _grid, _id)
                     _grid = new DataGridXL(_id, {
                         data: results.data
                     });
@@ -69,6 +70,7 @@ export default class extends Controller {
     }
 
     submit(event){
+        this.spinnerTarget.classList.remove('u-hide')
         this.element.querySelector('form').submit();
     }
 
