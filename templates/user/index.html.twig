@@ -20,8 +20,7 @@
                 </thead>
                 <tbody>
                 {% for user in users %}
-                    {# {{ dump(user.roless) }} #}
-                    {% if 'ROLE_SUPER_ADMIN' not in user.roles %}
+                    {% if ('ROLE_SUPER_ADMIN' not in user.roles) %}
                         <tr>
                             <td>{{ user.username }}</td>
                             <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
