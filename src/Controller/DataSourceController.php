@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\DataSource;
 use App\Form\DataSource1Type;
 use App\Repository\DataSourceRepository;
+use App\Repository\ExperimentationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,6 +20,17 @@ class DataSourceController extends AbstractController
     {
         return $this->render('data_source/index.html.twig', [
             'data_sources' => $dataSourceRepository->findAllWithExperimentationCount(),
+        ]);
+    }
+
+    #[Route('/{id}/show', name: 'app_data_source_show', methods: ['GET'])]
+    public function show(DataSource $dataSource, ExperimentationRepository $expRep): Response
+    {   
+        $nbExp = $expRep->countBySource($dataSource->getId());
+
+        return $this->render('data_source/show.html.twig', [
+            'data_source' => $dataSource,
+            'nbExp' => $nbExp
         ]);
     }
 

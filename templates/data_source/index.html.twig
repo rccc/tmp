@@ -15,9 +15,7 @@
                         <th>Date</th>
                         <th>Contributeur</th>
                         <th>Nb Expérimentations</th>
-                        {% if is_granted('ROLE_ADMIN') or data_source.uploader.id == app.user.id %}
-                            <th>actions</th>
-                        {% endif %}
+                        <th>actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,11 +25,12 @@
                         <td>{{ data_source.createdAt ? data_source.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                         <td>{{ data_source.uploader.username }}</td>
                         <td>{{ data_source.countExp }}</td>
-                        {% if is_granted('ROLE_ADMIN') or data_source.uploader.id == app.user.id %}
-                            <td>
+                        <td>
+                            {% if is_granted('ROLE_ADMIN') or data_source.uploader.id == app.user.id %}
                                 {% include 'data_source/_delete_form.html.twig' %}
-                            </td>
-                        {% endif %}
+                            {% endif %}
+                            <a href="{{ path('app_data_source_show',  {'id': data_source.id}) }}">Voir</a>
+                        </td>
                     </tr>
                 {% else %}
                     <tr>

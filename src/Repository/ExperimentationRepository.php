@@ -22,6 +22,17 @@ class ExperimentationRepository extends ServiceEntityRepository
         parent::__construct($registry, Experimentation::class);
     }
 
+    public function countBySource(int $sourceId)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = 'SELECT count(*) from experimentation where source_id = :source_id';
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue('source_id', $sourceId);
+        $result = $stmt->executeQuery();       
+
+        return $result->fetchOne(); 
+    }
+
     public function getNumExpList()
     {
         $conn = $this->getEntityManager()->getConnection();

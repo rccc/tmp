@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DataSource {% endblock %}
+
+{% block page_title %}Source{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-12">
+            <table>
+                <tr>
+                    <th>Date</th>
+                    <td>{{ data_source.createdAt ? data_source.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Contributeur</th>
+                    <td>{{ data_source.uploader.username }}</td>
+                </tr>
+                <tr>
+                    <th>Nb Expérimentations</th>
+                    <td>{{ nbExp }}</td>
+                </tr>
+                <tr>
+                    <th>Fichier</th>
+                    <td>{{ data_source.filename }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
+
