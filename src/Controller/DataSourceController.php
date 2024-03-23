@@ -26,8 +26,25 @@ class DataSourceController extends AbstractController
     public function delete(Request $request, DataSource $dataSource, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$dataSource->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($dataSource);
-            $entityManager->flush();
+
+            try {
+                $entityManager->remove($dataSource);
+                $entityManager->flush();                
+            }
+            catch (\Exception $e)
+            {
+                $this->addFlash('error', 'Une erreur est survenue lors de la supperssion de la source');
+            }
+
+            try {
+                $filepath = $this->getParameter('source_directory').'/'.$dataSource->getFilename();
+                unlink($filepath);                
+            }
+            catch (\Exception $e)
+            {
+                $this->addFlash('error', 'Les données ont été supprimée mais une erreur est survenue lors de la suppression du fichier');
+            }
+        
         }
 
         return $this->redirectToRoute('app_data_source_index', [], Response::HTTP_SEE_OTHER);
