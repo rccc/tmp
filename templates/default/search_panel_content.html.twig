@@ -1,0 +1,86 @@
+    {#
+            "" => null,
+            "" => null,
+            "" => null,
+            "" => null,
+            "passage" => null,
+            "stress" => null,
+            "temps-traitement" => null,
+            "genes-analyses" => null,
+            "proteine-correspondante" => null,
+            "proteines-analysees" => null,
+            "gene-correspondant" => null,
+            "projet" => null,
+            "nom-item" => null,
+            "numero-item" => null,
+            "type-echantillon" => null,
+            "nom-r-et-d" => null,
+            "nom-commercial" => null,
+            "reference-produit" => null,
+            "pourcentage-produit" => null,
+            "genre" => null,
+            "espece" => null,
+            "fold-change" => null,
+            "augmentation-diminution" => null,
+            "notation" => null
+#}
+
+<aside class="l-aside is-narrow is-pinned is-collapsed" data-aside-panel-target="panel">
+    
+    <div class="row">
+        <div class="col-12">
+
+            <header>
+                <p>
+                    <button class="js-aside-pin is-dense" data-action="aside-panel#togglePin">Pin</button>
+                    <button class="js-aside-close is-dense" data-action="aside-panel#close">Close</button>
+                </p>
+                <p>
+                    <code>l-aside</code>
+                </p>
+                <p>Panel width: <button class="is-inline is-dense js-aside-resize" data-resize-class="is-narrow" aria-controls="aside-panel" data-action="aside-panel#narrow">narrow</button> <button class="is-dense is-inline js-aside-resize" data-resize-class="" aria-controls="aside-panel"  data-action="aside-panel#default">default</button> <button class="is-dense is-inline js-aside-resize" data-resize-class="is-wide" aria-controls="aside-panel" data-action="aside-panel#wide">wide</button></p>
+                
+            </header>
+
+            <main data-controller="grid-column">
+            
+                {% block aside_panel_body %}
+
+                    <h3>Colonnes</h3>
+                    
+                    <form action="">
+                        
+                        <label class="p-checkbox">
+                            <input type="checkbox" aria-labelledby="numero-experimentation" value="numero-experimentation" class="p-checkbox__input" checked>
+                            <span class="p-checkbox__label" id="numero-experimentation">numero-experimentation</span>
+                        </label>
+
+                        <label class="p-checkbox">
+                            <input type="checkbox" aria-labelledby="type-experimentation" value="type-experimentation" class="p-checkbox__input" checked>
+                            <span class="p-checkbox__label" id="type-experimentation">type-experimentation</span>
+                        </label>
+
+                        <label class="p-checkbox">
+                            <input type="checkbox" aria-labelledby="site-essai" value="site-essai" class="p-checkbox__input" checked>
+                            <span class="p-checkbox__label" id="site-essai">site-essai</span>
+                        </label>
+
+                        <label class="p-checkbox">
+                            <input type="checkbox" aria-labelledby="systeme-essai" value="systeme-essai" class="p-checkbox__input" checked>
+                            <span class="p-checkbox__label" id="systeme-essai">systeme-essai</span>
+                        </label>
+
+                        <label class="p-checkbox">
+                            <input type="checkbox" aria-labelledby="lot-cellules" value="lot-cellules" class="p-checkbox__input" checked>
+                            <span class="p-checkbox__label" id="lot-cellules">lot-cellules</span>
+                        </label>
+
+                    </form>
+
+                {% endblock %}                
+            </main>
+
+        </div>
+    </div>
+
+</aside>

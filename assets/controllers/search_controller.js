@@ -13,7 +13,25 @@ import DataGridXL from "@datagridxl/datagridxl2";
 export default class extends Controller {
 
     static targets = ["grid", "exportBtn"]
+    
     grid = null 
+    
+    gridOptions = {
+        allowCut: false,
+        allowPaste: false,
+        allowEditCells: false,
+        allowFillCells: false,
+        allowDeleteCols: false,
+        allowInsertCols: false,
+        allowMoveCols: false,
+        allowFreezeCols: true,
+        allowDeleteRows: false,
+        allowInsertRows: false,
+        allowMoveRows: false,
+        allowHideRows: false,
+        allowShowRows: false,
+        allowFreezeRows: false
+    }
 
     async submit(e){
         
@@ -48,8 +66,24 @@ export default class extends Controller {
             this.gridTarget.classList.remove('u-hide')
             this.exportBtnTarget.classList.remove('u-hide')
 
+            let opts = this.gridOptions
+
             this.grid = new DataGridXL('grid', {
-                data: response.data
+                data: response.data,
+                allowCut: false,
+                allowPaste: false,
+                allowEditCells: false,
+                allowFillCells: false,
+                allowDeleteCols: false,
+                allowInsertCols: false,
+                allowMoveCols: false,
+                allowFreezeCols: true,
+                allowDeleteRows: false,
+                allowInsertRows: false,
+                allowMoveRows: false,
+                allowHideRows: false,
+                allowShowRows: false,
+                allowFreezeRows: false
             });            
         }
     }
@@ -69,6 +103,11 @@ export default class extends Controller {
         }
 
         return isEmpty
+    }
+
+    hideColumn(event) {
+        console.log('hideColumn', event.detail)
+        
     }
 
 }

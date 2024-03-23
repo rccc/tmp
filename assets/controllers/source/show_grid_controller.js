@@ -29,7 +29,21 @@ export default class extends Controller {
             this.element.classList.remove('u-hide')
 
             this.grid = new DataGridXL('grid', {
-                data: response.data
+                data: response.data,
+                allowCut: false,
+                allowPaste: false,
+                allowEditCells: false,
+                allowFillCells: false,
+                allowDeleteCols: false,
+                allowInsertCols: false,
+                allowMoveCols: false,
+                allowFreezeCols: true,
+                allowDeleteRows: false,
+                allowInsertRows: false,
+                allowMoveRows: false,
+                allowHideRows: false,
+                allowShowRows: false,
+                allowFreezeRows: false
             }); 
         }else{
             alert('Une erreur est intervenue lors de la récupération des données les données.')

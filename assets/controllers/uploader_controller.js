@@ -62,7 +62,21 @@ export default class extends Controller {
                 skipEmptyLines : true,
                 complete: function(results) {
                     _grid = new DataGridXL(_id, {
-                        data: results.data
+                        data: results.data,
+                        allowCut: false,
+                        allowPaste: false,
+                        allowEditCells: false,
+                        allowFillCells: false,
+                        allowDeleteCols: false,
+                        allowInsertCols: false,
+                        allowMoveCols: false,
+                        allowFreezeCols: true,
+                        allowDeleteRows: false,
+                        allowInsertRows: false,
+                        allowMoveRows: false,
+                        allowHideRows: false,
+                        allowShowRows: false,
+                        allowFreezeRows: false
                     });
                 }
             });            
