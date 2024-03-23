@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/source')]
@@ -60,5 +61,18 @@ class DataSourceController extends AbstractController
         }
 
         return $this->redirectToRoute('app_data_source_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/exp/json', name: 'app_data_source_exp_as_json', methods: ['GET'])]
+    public function expAsJson(DataSource $dataSource, ExperimentationRepository $expRep): Response
+    {
+        try {
+            $result = $expRep->findBySource($dataSource->getId());            
+        }
+        catch(\Exception $e) {
+            return new JsonResponse(['status' => 'error', 'message' => $e->getMessage()]);
+        }
+
+        return new JsonResponse(['status' => 'success', 'data' => $result]);
     }
 }

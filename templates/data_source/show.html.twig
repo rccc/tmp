@@ -29,5 +29,15 @@
         </div>
     </div>
 
+    <div 
+        class="row u-hide" 
+        data-controller="source--show-grid" 
+        data-source--show-grid-url-value="{{ path('app_data_source_exp_as_json', {'id' :data_source.id}) }}">
+        <div class="col-12">
+            <div data-turbo="false">
+                <div id="grid"></div>                               
+            </div>
+        </div>
+    </div>
 {% endblock %}
 

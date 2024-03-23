@@ -33,6 +33,18 @@ class ExperimentationRepository extends ServiceEntityRepository
         return $result->fetchOne(); 
     }
 
+    public function findBySource($sourceId) {
+
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = 'SELECT * from experimentation where source_id = :source_id';
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue('source_id', $sourceId);
+
+        $result = $stmt->executeQuery();
+
+        return $result->fetchAllAssociative();        
+    }
+
     public function getNumExpList()
     {
         $conn = $this->getEntityManager()->getConnection();
