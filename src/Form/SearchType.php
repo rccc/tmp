@@ -12,6 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\ResetType;
 
 class SearchType extends AbstractType
 {
@@ -34,14 +35,26 @@ class SearchType extends AbstractType
                 'choices' => !empty($options['syst_essai']) ? $options['syst_essai'] : [],
                 'required' => false 
             ])
-            ->add('lot_cell')
-            ->add('passage')
+            ->add('lot_cell',ChoiceType::class, [
+                'placeholder' => '',
+                'choices' => !empty($options['lot_cell']) ? $options['lot_cell'] : [],
+                'required' => false 
+            ])
+            ->add('passage',ChoiceType::class, [
+                'placeholder' => '',
+                'choices' => !empty($options['passage']) ? $options['passage'] : [],
+                'required' => false 
+            ])
             ->add('stress')
             ->add('temps_traitement')
             ->add('gene')   
             ->add('prot_analyse')
             ->add('gene_corr')
-            ->add('projet')
+            ->add('projet', ChoiceType::class, [
+                'placeholder' => '',
+                'choices' => !empty($options['project']) ? $options['project'] : [],
+                'required' => false 
+            ])
             ->add('nom_item')
             ->add('nom_comm',ChoiceType::class, [
                 'placeholder' => '',
@@ -50,16 +63,38 @@ class SearchType extends AbstractType
             ])
             ->add('ref_produit')
             ->add('pourcentage_produit')
-            ->add('genre')
-            ->add('espece')
+            ->add('genre', ChoiceType::class, [
+                'placeholder' => '',
+                'choices' => !empty($options['genre']) ? $options['genre'] : [],
+                'required' => false 
+            ])
+            ->add('espece', ChoiceType::class, [
+                'placeholder' => '',
+                'choices' => !empty($options['espece']) ? $options['espece'] : [],
+                'required' => false 
+            ])
             ->add('fold_change')
             ->add('augm_dim')
-            ->add('notation')
+            ->add('notation',ChoiceType::class, [
+                'placeholder' => '',
+                'choices' => !empty($options['notation']) ? $options['notation'] : [],
+                'required' => false 
+            ])
             ->add('prot_corr')
-            ->add('num_item')
-            ->add('type_echantillon')
+            ->add('num_item',ChoiceType::class, [
+                'placeholder' => '',
+                'choices' => !empty($options['num_item']) ? $options['num_item'] : [],
+                'required' => false 
+            ])
+            ->add('type_echantillon',ChoiceType::class, [
+                'placeholder' => '',
+                'choices' => !empty($options['type_echantillon']) ? $options['type_echantillon'] : [],
+                'required' => false 
+            ])
             ->add('nom_rec_dev')
             ->add('export', SubmitType::class)
+            ->add('reset', ResetType::class)
+
         ;
     }
 
@@ -70,7 +105,15 @@ class SearchType extends AbstractType
             'num_exp'       => [],
             'type_exp'      => [],
             'nom_comm'      => [],
-            'syst_essai'    => []
+            'syst_essai'    => [],
+            'project'       => [],
+            'num_item'      => [],
+            'genre'         => [],
+            'espece'        => [],
+            'lot_cell'      => [],
+            'passage'       => [],
+            'notation'      => [],
+            'type_echantillon' => []
         ]);
     }
 }

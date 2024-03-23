@@ -67,6 +67,7 @@ class DefaultController extends AbstractController
     public function emptyFile()
     {   
         $content = '';
+
         /*
         $arr = [
             "Numéro expérimentation" => null,
@@ -129,7 +130,6 @@ class DefaultController extends AbstractController
         {
             $serializer = new Serializer([new ObjectNormalizer()], [new CsvEncoder()]);
 
-            // encoding contents in CSV format
             $content = $serializer->encode($arr, 'csv');            
         }
         catch(\Exception $e)
@@ -158,12 +158,32 @@ class DefaultController extends AbstractController
         $typeExpList    = $manager->getRepository(Experimentation::class)->getTypeExpListAsChoiceList();
         $nomCommList    = $manager->getRepository(Experimentation::class)->getNomCommListAsChoiceList();
         $sysEssaiList   = $manager->getRepository(Experimentation::class)->getSystEssaiListAsChoiceList();
+        $projectList    = $manager->getRepository(Experimentation::class)->getProjectListAsChoiceList();
+        $numItemList    = $manager->getRepository(Experimentation::class)->getNumItemListAsChoiceList();
+        $genreList      = $manager->getRepository(Experimentation::class)->getGenreListAsChoiceList();
+        $especeList     = $manager->getRepository(Experimentation::class)->getEspeceListAsChoiceList();
+
+        $siteEssaiList          = $manager->getRepository(Experimentation::class)->getSiteEssaiListAsChoiceList();
+        // $protCorrList     = $manager->getRepository(Experimentation::class)->getProtCorrListAsChoiceList();
+        $lotCellList            = $manager->getRepository(Experimentation::class)->getLotCellListAsChoiceList();
+        $passageList            = $manager->getRepository(Experimentation::class)->getPassageListAsChoiceList();
+        $notationList           = $manager->getRepository(Experimentation::class)->getNotationListAsChoiceList();
+        $typeEchantillonList    = $manager->getRepository(Experimentation::class)->getTypeEchantillonListAsChoiceList();
+
 
         $form =  $this->createForm(SearchType::class, null, [
             'num_exp'       => $numExpList,
             'type_exp'      => $typeExpList,
             'nom_comm'      => $nomCommList,           
-            'syst_essai'    => $sysEssaiList           
+            'syst_essai'    => $sysEssaiList,
+            'project'       => $projectList,
+            'num_item'       => $numItemList,
+            'genre'         => $genreList,
+            'espece'        => $especeList,
+            'lot_cell'      => $lotCellList,
+            'passage'       => $passageList,
+            'notation'      => $notationList,
+            'type_echantillon' => $typeEchantillonList
         ]);
 
         $form->handleRequest($request);
