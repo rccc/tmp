@@ -39,6 +39,12 @@ class DefaultController extends AbstractController
                 if($ret)
                 {
                     $this->addFlash('success', 'Data imported successfully');
+
+                    $dataSource = $importer->getDataSource();
+
+                    if($dataSource){
+                        return $this->redirectToRoute('app_data_source_show', ['id' => $dataSource->getId()]);
+                    }
                 }
                 else
                 {

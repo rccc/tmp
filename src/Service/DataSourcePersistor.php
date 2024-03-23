@@ -37,6 +37,8 @@ class DataSourcePersistor
 
 			$res = $this->persistExperimentations($csvData, $dataSource->getId());
 
+			$this->dataSource = $dataSource;
+
 			// $count = $this->countExperimentationBySource($dataSource->getId());
 
 
@@ -45,7 +47,12 @@ class DataSourcePersistor
 		}
 
 		return true;
-	}	
+	}		
+
+	public function getDataSource()
+	{
+		return $this->dataSource;
+	}
 
 	public function persistExperimentations(array $csvData, $sourceId): bool
 	{	
@@ -73,11 +80,6 @@ class DataSourcePersistor
 		}
 
 		return true;
-	}
-
-	public function getDatasource(): DataSource
-	{
-		return $this->dataSource;
 	}
 
 	// private function createEntity(array $row)

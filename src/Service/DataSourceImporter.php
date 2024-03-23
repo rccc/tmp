@@ -65,7 +65,7 @@ class DataSourceImporter
 
 		try {
 			
-			$datasource = $this->persistDataSource();
+			$ret = $this->persistDataSource();
 			// $this->persistExperimentations($datasource);
 
 		} catch (Exception $e) {
@@ -83,7 +83,6 @@ class DataSourceImporter
 		$filename = $this->uploader->upload($file);		
 		return $filename;
 	}
-
 
 
 	public function getError()
@@ -140,5 +139,9 @@ class DataSourceImporter
 		}
 
 		return true;
+	}
+
+	public function getDatasource() {
+		return $this->persistor->getDatasource();
 	}
 }
