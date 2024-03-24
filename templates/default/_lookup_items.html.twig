@@ -1,0 +1,9 @@
+{% if items is defined and items is not empty %}
+
+	{% for item in items %}
+		<div class="autocomplete-item" data-autocomplete-value-param="{{ item }}" data-action="click->autocomplete#select">
+			{{ item }}
+		</div>
+	{% endfor %}
+
+{% endif %}

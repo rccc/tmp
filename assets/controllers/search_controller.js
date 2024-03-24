@@ -83,7 +83,7 @@ export default class extends Controller {
                     break
                 }
             }
-            console.log(pair[0]+ ", " + pair[1]);
+            // console.log(pair[0]+ ", " + pair[1]);
         }
 
         return isEmpty

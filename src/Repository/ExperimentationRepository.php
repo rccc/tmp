@@ -71,7 +71,7 @@ class ExperimentationRepository extends ServiceEntityRepository
     public function geneLookup(string $pattern, int $limit = 10)
     {
         $conn = $this->getEntityManager()->getConnection();
-        $sql = 'SELECT distinct gene from experimentation where gene ilike :gene order by gene ASC limit :limit';
+        $sql = "SELECT distinct gene from experimentation where gene ilike :pattern order by gene ASC limit :limit";
         $stmt = $conn->prepare($sql);
         $stmt->bindValue('pattern', $pattern . '%');
         $stmt->bindValue('limit', $limit);

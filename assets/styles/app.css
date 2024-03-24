@@ -17,6 +17,15 @@ body {
 /* end datagrid  */
 
 
+/* autocomplete  */
+.autocomplete-item {
+    padding: 6px 6px;
+    cursor: pointer;
+}
+.autocomplete-item:hover {
+    background-color: #ddd;
+}
+
 .wrapper {
     @media(min-width: 992px) {
         display: grid;

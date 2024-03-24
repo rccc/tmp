@@ -230,4 +230,27 @@ class DefaultController extends AbstractController
         ]);
     }
 
+    #[Route('/gene/lookup/', name: 'app_gene_lookup')]
+    public function geneLookup(Request $request, EntityManagerInterface $manager): Response
+    {
+        $items = [];
+        $content = json_decode($request->getContent(), true);
+        
+        if(!empty($content))
+        {
+            $result = $manager->getRepository(Experimentation::class)->geneLookup($content['pattern']);      
+
+            foreach($result as $row)
+            {
+                $items[] = $row['gene'];
+            }
+    
+            $html = $this->renderView('default/_lookup_items.html.twig', ['items' => $items]);
+
+            return new JsonResponse(['status'=>'success', 'data' => $html]);
+
+        }
+
+        return new JsonResponse(['status'=>'error']);
+    }
 }

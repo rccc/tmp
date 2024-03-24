@@ -30,7 +30,16 @@
 		    				</div>
 		    				<div class="col-4">
 
-		    					{{ form_row(form.gene) }}
+		    					<div data-controller="autocomplete" data-autocomplete-url-value="{{ path('app_gene_lookup') }}">
+		    						{{ form_row(form.gene, {'attr': {
+				    					'data-action':'input->autocomplete#change',
+				    					'autocomplete':'off',
+				    					'data-autocomplete-target':'input'
+				    				}}) }}
+				    				<div data-autocomplete-target="list" class="u-hide">
+				    					
+				    				</div>
+		    					</div>
 		    					{{ form_row(form.gene_corr) }}
 								{{ form_row(form.prot_corr) }}
 		    					{{ form_row(form.prot_analyse) }}
