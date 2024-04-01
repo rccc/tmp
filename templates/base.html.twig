@@ -14,7 +14,7 @@
         {% endblock %}
         
     </head>
-    <body class="is-paper" {# data-controller="aside-panel" #}>
+    <body class="is-paper" data-controller="aside-panel">
 
         <div class="l-application app-codif" role="presentation">
 
@@ -146,13 +146,8 @@
                 {% endblock %}
             </main>
 
-            {#
             {% block aside_panel %}
-                
-                {{ include('default/search_panel_content.html.twig') }}
-
             {% endblock %}
-            #}
             
         </div>
 

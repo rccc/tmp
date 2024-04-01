@@ -10,80 +10,121 @@
 		
 		<div class="row">
 		    <div class="col-12">
-		    	<div data-turbo=false class="mb-4">
+		    	<div data-turbo=false class="mb-4" >
 
 		    		{{ form_start(form, {'attr':{'action':path('app_search')}}) }}
-		    			<div class="row">
-		    				<div class="col-4">
+		    		<div class="form-search-grid">
+		    			
 
-		    					{{ form_row(form.nom_comm) }}
-		    					{{ form_row(form.genre) }}
-
-
-
-		    					{{ form_row(form.num_exp) }}
-		    					{{ form_row(form.type_exp) }}
-		    					{{ form_row(form.site_essai) }}
-		    					{{ form_row(form.syst_essai) }}
-		    					{{ form_row(form.lot_cell) }}
-		    					{{ form_row(form.passage) }}
-		    					{{ form_row(form.stress) }}
-		    					{{ form_row(form.temps_traitement) }}
-		    					{{ form_row(form.pourcentage_produit) }}
-
-		    				</div>
-		    				<div class="col-4">
-
-		    					{{ form_row(form.nom_item) }}
-
-		    					<div data-controller="autocomplete" data-autocomplete-url-value="{{ path('app_gene_lookup') }}">
-		    						{{ form_row(form.gene, {'attr': {
-				    					'data-action':'input->autocomplete#change',
-				    					'autocomplete':'off',
-				    					'data-autocomplete-target':'input'
-				    				}}) }}
-				    				<div data-autocomplete-target="list" class="u-hide">
-				    					
-				    				</div>
+		    					<div data-options-row>
+		    						{{ form_row(form.nom_comm) }}
 		    					</div>
-		    					    					
-		    					{{ form_row(form.gene_corr) }}
-								{{ form_row(form.prot_corr) }}
-		    					{{ form_row(form.prot_analyse) }}
-		    					{{ form_row(form.projet) }}
-		    					{{ form_row(form.notation) }}
-	
+		    					<div data-options-row>
+		    						{{ form_row(form.genre) }}
+		    					</div>
+		    					<div data-options-row>
+		    						{{ form_row(form.num_exp) }}
+		    					</div>
+		    					<div data-options-row>
+		    						{{ form_row(form.type_exp) }}
+		    					</div>
+		    					<div data-options-row>
+		    						{{ form_row(form.site_essai) }}
+		    					</div>
+		    					<div data-options-row>
+		    						{{ form_row(form.syst_essai) }}
+		    					</div>
+		    					<div data-options-row>
+		    						{{ form_row(form.lot_cell) }}
+		    					</div>
+		    					<div data-options-row>
+		    						{{ form_row(form.passage) }}
+		    					</div>
+		    					<div data-options-row>
+		    						{{ form_row(form.stress) }}
+		    					</div>
+		    					<div data-options-row>
+		    						{{ form_row(form.temps_traitement) }}
+		    					</div>
+		    					<div data-options-row>
+		    						{{ form_row(form.pourcentage_produit) }}
+		    					</div>
+		    					<div data-options-row>
+			    					{{ form_row(form.nom_item) }}
+		    					</div>
+		    					<div data-options-row>
 
+			    					<div data-controller="autocomplete" data-autocomplete-url-value="{{ path('app_gene_lookup') }}">
+			    						{{ form_row(form.gene, {'attr': {
+					    					'data-action':'input->autocomplete#change',
+					    					'autocomplete':'off',
+					    					'data-autocomplete-target':'input'
+					    				}}) }}
+					    				<div data-autocomplete-target="list" class="u-hide">
+					    					
+					    				</div>
+			    					</div>
+			    					    					
+								</div>
+		    					<div data-options-row>
+									{{ form_row(form.gene_corr) }}
+		    					</div>
+		    					<div data-options-row>
+									{{ form_row(form.prot_corr) }}
+		    					</div>
+		    					<div data-options-row>
+		    						{{ form_row(form.prot_analyse) }}
+		    					</div>
+		    					<div data-options-row>
+		    						{{ form_row(form.projet) }}
+		    					</div>
+		    					<div data-options-row>
+		    						{{ form_row(form.notation) }}
+		    					</div>
+		    					<div data-options-row>
+		    						{{ form_row(form.ref_produit) }}
+		    					</div>
+		    					<div data-options-row>
+		    						{{ form_row(form.espece) }}
+		    					</div>
+		    					<div data-options-row>
+		    						{{ form_row(form.fold_change) }}
+		    					</div>
+		    					<div data-options-row>
+		    						{{ form_row(form.augm_dim) }}
+		    					</div>
+		    					<div data-options-row>
+		    						{{ form_row(form.num_item) }}
+		    					</div>
+		    					<div data-options-row>
+		    						{{ form_row(form.type_echantillon) }}
+		    					</div>
+		    					<div data-options-row>
+		    						{{ form_row(form.nom_rec_dev) }}
+		    					</div>
+
+		    		</div>
+
+		    			<div class="d-flex justify-content-between">
+		    				<div>
+		    					<button data-action="click->search#submit">Rechercher</button>
+		    					{{ form_row(form.reset, {'attr': 
+		    						{
+		    							'data-action':'click->search#reset',
+		    							'class':'u-hide',
+		    							'data-search-target':'resetBtn',  
+		    						}}) }}
 		    				</div>
-		    				
-		    				<div class="col-4">
-		    					{{ form_row(form.ref_produit) }}
-
-		    					{{ form_row(form.espece) }}
-		    					{{ form_row(form.fold_change) }}
-		    					{{ form_row(form.augm_dim) }}
-		    					{{ form_row(form.num_item) }}
-		    					{{ form_row(form.type_echantillon) }}
-		    					{{ form_row(form.nom_rec_dev) }}
-
+		    				<div class="">
+		    					{{ form_row(form.export, {'attr': 
+		    						{
+		    							'class':'u-hide',
+		    							'data-search-target':'exportBtn', 
+		    						}}) 
+		    					}}
+		    					<button data-action="aside-panel#toggleCollapse">Plus d'options</button>
 		    				</div>
 		    			</div>
-
-		    			<button data-action="click->search#submit">Rechercher</button>
-		    			{{ form_row(form.reset, {'attr': 
-		    				{
-		    					'data-action':'click->search#reset',
-		    					'class':'u-hide',
-		    					'data-search-target':'resetBtn',  
-		    				}}) }}
-		    			{{ form_row(form.export, {'attr': 
-		    				{
-		    					'class':'u-hide',
-		    					'data-search-target':'exportBtn', 
-		    				}}) 
-		    			}}
-
-		    			{# <button data-action="aside-panel#toggleCollapse">Toggle</button> #}
 		    		{{ form_end(form) }}
 		    	</div>
 		    </div>
@@ -98,6 +139,9 @@
 		</div>
 
 	</div>
-
+	
 {% endblock %}
 
+{% block aside_panel %}
+	{{ include('default/search_panel_content.html.twig') }}
+{% endblock %}
